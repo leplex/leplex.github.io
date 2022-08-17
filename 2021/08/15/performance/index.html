@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Xin Wang">
+
+
+    <meta name="subtitle" content="talk is cheap, show me the code">
+
+
+    <meta name="description" content="People's dreams will not end">
+
+
+    <meta name="keywords" content="tech">
+
+
+<title>不要过早地考虑性能问题 | Xin Wang&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/image/icon.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Xin Wang&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Xin Wang&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">不要过早地考虑性能问题</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Xin Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 15, 2021&nbsp;&nbsp;16:42:50</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%80%9D%E8%80%83/">思考</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>先引用一下名人名言, 自己总结出的东西, 去google一下, 原来前人们早就想到了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Premature optimization is the root of all evil ----- Donald Knuth</span><br></pre></td></tr></table></figure>
+
+<p>聊一个自己遇到过的沟通场景:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">小明: 新的设计方案更加合理, 将通用性的功能下沉到A模块, 其他模块间也解耦了。</span><br><span class="line">小亮: 看起来是这样的, 但如此这样, A模块会有性能问题啊！所以不能采用这样的方案</span><br><span class="line">小明: ......</span><br></pre></td></tr></table></figure>
+<p>这里A模块真的有性能问题吗？ 小亮的判断依据大概就是A模块是加了一点计算逻辑, 所以便推测很可能有性能问题。这样的推测不能说没有道理, 也很可能是对的。</p>
+<p>但是问题出在哪里呢？</p>
+<h2 id="性能问题未必真的存在"><a href="#性能问题未必真的存在" class="headerlink" title="性能问题未必真的存在"></a>性能问题未必真的存在</h2><p>很多时候, 性能问题是想象出来的, 刚开始时, 一顿操作猛如虎, 设计了各种机制优化性能, 最后发现跟最朴素的写法性能测试上没区别。<br>比如某个服务的大部性能消耗是在数据库查询上, 某个同学要优化网络传输, 使用了自认先进的grpc框架。然后呢？性能测试下来跟朴素的http几乎一样, 还白白花了相对更多的时间。<br>ps: 这个例子不表明使用grpc就有问题, 对于性能问题不能靠想象。</p>
+<h2 id="性能问题尽量在局部解决"><a href="#性能问题尽量在局部解决" class="headerlink" title="性能问题尽量在局部解决"></a>性能问题尽量在局部解决</h2><p>说回上文提到的场景, 假如即便真的有性能问题, 其实也可以在A模块内部进行解决, 借此架构调整的机会, 反而提高了底层模块的能力。其实性能问题如果存在, 总要在一个地方进行解决。不是在A解决, 那么A的调用方就需要想办法解决。<br>这里提一个我3年前遇到的场景:<br>A同学的部门为我们提高数据查询服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">me: 你们这个查询接口的性能不太行啊, 请求量也不大(其实是翻页翻到后边, 他们的数据库会抗不住)</span><br><span class="line">A: 你们查询为什么要翻那么大的页？</span><br><span class="line">me: 我们查询一个时间段所有的数据啊。</span><br><span class="line">A: 你们可以实时一直请求, 第一步：先请求这个接口, 然后再...最后...。 然后存到自己的系统里, 就不用翻那么大页了。</span><br><span class="line">me: ......(无语)</span><br></pre></td></tr></table></figure>
+<p>这里的问题就比较典型, 其实A同学可以进一步优化自己的系统, 解决查询翻页性能崩溃的问题, 但是他却选择了让他的用户去承担。所以后来我们自己做了一套系统来存储数据, 只从他们那里简单的同步数据, 不再调用他们的接口。但重复造了一遍轮子, 实在是时间与金钱的浪费。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>架构的合理性, 尽量不要为性能问题让步, 尽量将性能问题在模块内解决而不是扩散出去。</li>
+<li>一开始想象出来的性能问题, 未必真的存在,。</li>
+<li>解决性能问题, 要找到真正的瓶颈去优化, 优化非关键因素浪费表情。</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Xin Wang</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>采用<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE, 转载情注明来自<a href="www.tianrunhua.cn">Xin Wang's Blog</a></span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/system-design/"># system design</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/08/16/systemQuality/">工程质量与加班</a>
+            
+            
+            <a class="next" rel="next" href="/2021/08/13/%E7%BB%84%E5%90%88%E5%92%8C%E7%BB%A7%E6%89%BF/">反对继承</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Xin Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

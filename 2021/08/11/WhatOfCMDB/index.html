@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Xin Wang">
+
+
+    <meta name="subtitle" content="talk is cheap, show me the code">
+
+
+    <meta name="description" content="People's dreams will not end">
+
+
+    <meta name="keywords" content="tech">
+
+
+<title>我对cmdb的宏观理解 | Xin Wang&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/image/icon.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Xin Wang&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Xin Wang&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我对cmdb的宏观理解</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Xin Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 11, 2021&nbsp;&nbsp;17:55:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="什么是cmdb"><a href="#什么是cmdb" class="headerlink" title="什么是cmdb"></a>什么是cmdb</h2><p>来看一下wiki的定义：</p>
+<p>配置管理数据库（configuration management database）简称CMDB,是信息技术基础架构库（ITIL）用语,是组织用来储存软件硬件资产（常称为形态项目,CI）资讯的数据库。配置管理数据库可以将形态项目拆解到对应的逻辑层[1]。数据库类似组织的资料仓储,也会记录各资产之间关系的资讯[2]。CMDB提供方式可以了解组织的关键资产以及彼此之间的关系,例如信息系统、upstream来源以及资产之间的相依性、以及资产的downstream目标[3]。</p>
+<p>非常的抽象哈,举个例子：<br><img src="/image/cmdb.png" width="50%" height="50%"><br>如图, 我们的运维资源之间有着各种各样的关系,是一个图,而cmdb,管理的就是这样的一个图模型,提供这张图的增删改查。<br>那么这样的数据有什么作用呢？</p>
+<ol>
+<li>报警优化, 例如部署mongodb的机器出现了故障,就可以根据cmdb数据迅速计算出影响范围。</li>
+<li>配置管理。 上层业务开发者,可以根据cmdb的数据生成自己的配置。</li>
+<li>其他(应用场景还是很广泛的,我主要的工作还是在cmdb及其数据本身的建设,所以具体怎么用这些数据,了解的不是太深)</li>
+</ol>
+<h2 id="cmdb的架构"><a href="#cmdb的架构" class="headerlink" title="cmdb的架构"></a>cmdb的架构</h2><img src="/image/cmdb_infra.png" width="50%" height="50%">
+
+<ul>
+<li>cmdb层用来约束数据的输入输出,规定数据的写入和查询必须符合业务建模。例如机器能和服务可以建立关系,但是跟机房没有直接关系(实际建模关系是机器-机架-机房)</li>
+<li>etl。etl是录入cmdb数据的服务总称,需要收集各方数据写入到cmdb</li>
+<li>查询。查询指数据消费端</li>
+</ul>
+<h3 id="cmdb层"><a href="#cmdb层" class="headerlink" title="cmdb层"></a>cmdb层</h3><p>cmdb规范数据输入输出,管理业务建模元数据,为上游服务提供增删改查的接口。</p>
+<p>元数据：</p>
+<ul>
+<li>ci. 描述实体的元数据。例如机器,规定了机器数据有唯一表示,ip、cpu核数、内存大小等</li>
+<li>rs. 描述实体间关系的元数据。例如,规定机器和ipv4有1:n的关系</li>
+</ul>
+<p>当etl写入数据时,cmdb通过ci、rs的定义,检查输入是否合法。读数据,当然也按照元数据规定的格式读取数据。</p>
+<h3 id="etl"><a href="#etl" class="headerlink" title="etl"></a>etl</h3><p>我主要负责就是etl的开发, 从功能上来讲无非就是去收集兄弟部门或者agent采集的数据然后录入到cmdb,但是easy to say, hard to do. 遇见了无数的坑,本篇文章就不细说了。<br><img src='https://img2.baidu.com/it/u=2946701841,1025414129&fm=26&fmt=auto&gp=0.jpg' width="30%" height="30%"></img><br>有兴趣前往<a src='www.baidu.com'>cmdb etl与数据质量</a></p>
+<p>总结: 基础的idea就是这么简单,cmdb无非就是一个数据中心,给到各方去消费, 但是数据质量是最难保证,数据会不及时,不正确,不一致。这都会极大影响用户体验。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Xin Wang</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>采用<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE, 转载情注明来自<a href="www.tianrunhua.cn">Xin Wang's Blog</a></span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/cmdb/"># cmdb</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/08/13/testRule/">测试就是开发,开发就是测试</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Xin Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
