@@ -102,4 +102,6 @@ theme: Chic
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/leplex/leplex.github.io
+  branch: master
