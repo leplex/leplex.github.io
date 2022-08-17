@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Alan's Blog
-subtitle: ''
-description: ''
-keywords:
-author: Alan Wang
-language: en
-timezone: ''
+title: Xin Wang's Blog
+subtitle: 'talk is cheap, show me the code'
+description: People's dreams will not end
+keywords: 'tech'
+author: Xin Wang
+language: ch
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -68,7 +68,7 @@ index_generator:
 # Category & Tag
 default_category: uncategorized
 category_map:
-tag_map:
+tag_map: 
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
@@ -97,11 +97,9 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: Chic
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
-  repo: https://github.com/leplex/leplex.github.io
-  token: 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
+  type: ''
